@@ -6,7 +6,7 @@ exports.createFor = (apiClient) ->
 
   renewOptions =
     async: yes
-    maxAge: 1000 * 60 * 60 * 24 # one day in ms
+    maxAge: 1000 * 60 * 60 * 12 # half day in ms
 
   renewSession = memoize apiClient.login, renewOptions
 
