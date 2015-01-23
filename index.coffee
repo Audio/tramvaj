@@ -1,16 +1,12 @@
 
+api = require './lib/api'
 config = require './config'
 debug = require('debug') 'tramvaj'
-async = require 'async'
 
-async.waterfall [
+url = 'http://ttws.timetable.cz/tt.asmx?WSDL'
+api.createClient url, config.credentials, (e, apiClient) ->
+    return console.log e if e
 
-  (next) ->
-    api = require './lib/api'
-    url = 'http://ttws.timetable.cz/tt.asmx?WSDL'
-    api.createClient url, config.credentials, next
-
-  (apiClient, next) ->
     express = require 'express'
     app = express()
 
@@ -19,7 +15,4 @@ async.waterfall [
     app.use middleware.renewSession
     app.use middleware.findEarliestTime
 
-    debug "Listening on port #{config.port}"
-    app.listen config.port, next
-
-], (e) -> console.log e if e
+    app.listen config.port, -> debug "Listening on port #{config.port}"
