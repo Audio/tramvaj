@@ -1,5 +1,5 @@
 
-debug = require('debug') 'trabant'
+debug = require('debug') 'tramvaj'
 soap = require 'soap'
 
 exports.createClient = (url, credentials, next) ->

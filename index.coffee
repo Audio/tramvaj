@@ -1,6 +1,6 @@
 
 config = require './config'
-debug = require('debug') 'trabant'
+debug = require('debug') 'tramvaj'
 async = require 'async'
 
 async.waterfall [

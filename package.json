@@ -1,5 +1,5 @@
 {
-  "name": "trabant",
+  "name": "tramvaj",
   "version": "0.0.0",
   "description": "Finds earliest arrival time of my tram!",
   "main": "index.coffee",
@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Audio/trabant.git"
+    "url": "https://github.com/Audio/tramvaj.git"
   },
   "keywords": [
-    "trabant"
+    "tramvaj"
   ],
   "author": "Audio",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Audio/trabant/issues"
+    "url": "https://github.com/Audio/tramvaj/issues"
   },
-  "homepage": "https://github.com/Audio/trabant",
+  "homepage": "https://github.com/Audio/tramvaj",
   "dependencies": {
     "async": "~0.9.0",
     "date-format-lite": "0.6.0",
