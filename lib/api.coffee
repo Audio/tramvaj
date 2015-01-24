@@ -24,10 +24,10 @@ createApiClient = (soapClient, credentials) ->
       debug "Login successful. Got session id #{sessionId}"
       next()
 
-  findEarliestTime: (opts, next) ->
+  findEarliest: (opts, next) ->
     query =
       sSessionID: sessionId
-      sCombID: opts.Prague
+      sCombID: opts.areaId
       iMaxCount: opts.maxResults
       sDate: opts.date
       sTime: opts.time
@@ -46,7 +46,11 @@ createApiClient = (soapClient, credentials) ->
     soapClient.Connection2 query, (e, r) ->
       return next "Find error: #{parseErr e.body}" if e?.body
       return next e if e
-      time = r?.Connection2Result?.oConnInfo?.aoConnections?[0]?.aoTrains?[0]?.aoRoute?[0]?.attributes?.sDepTime
-      return next 'Find error: earliest time not recognized' unless time
-      debug "Result: #{time}"
-      next null, time
+      trains = r?.Connection2Result?.oConnInfo?.aoConnections?[0]?.aoTrains?[0]
+      times = []
+      for i in [0...opts.maxResults]
+        time = trains?.aoRoute?[i]?.attributes?.sDepTime
+        times.push time if time
+      return next 'Find error: no earliest time recognized' unless times.length
+      debug "Result: #{times}"
+      next null, times.join(', ')

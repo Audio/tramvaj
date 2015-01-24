@@ -13,11 +13,11 @@ exports.createFor = (apiClient) ->
   renewSession: (req, res, next) ->
     renewSession next
 
-  findEarliestTime: (req, res, next) ->
+  findEarliest: (req, res, next) ->
     now = new Date
     opts =
-      Prague: 'PID'
-      maxResults: 1
+      areaId: 'PID' # Prague
+      maxResults: 2
       directOnly: yes
       date: now.format 'DD.MM.YYYY'
       time: now.format 'hh:mm'
@@ -25,7 +25,7 @@ exports.createFor = (apiClient) ->
       from: 'Vinohradska Vodarna'
       to: 'Kobylisy'
 
-    apiClient.findEarliestTime opts, (e, time) ->
+    apiClient.findEarliest opts, (e, time) ->
       return next e if e
       res.set 'Content-Type', 'text/plain'
       res.send time

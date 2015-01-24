@@ -13,6 +13,6 @@ api.createClient url, config.credentials, (e, apiClient) ->
     middlewares = require './lib/api.middleware.coffee'
     middleware = middlewares.createFor apiClient
     app.use middleware.renewSession
-    app.use middleware.findEarliestTime
+    app.use middleware.findEarliest
 
     app.listen config.port, -> debug "Listening on port #{config.port}"
