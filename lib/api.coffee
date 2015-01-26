@@ -46,10 +46,10 @@ createApiClient = (soapClient, credentials) ->
     soapClient.Connection2 query, (e, r) ->
       return next "Find error: #{parseErr e.body}" if e?.body
       return next e if e
-      trains = r?.Connection2Result?.oConnInfo?.aoConnections?[0]?.aoTrains?[0]
+      connections = r?.Connection2Result?.oConnInfo?.aoConnections
       times = []
       for i in [0...opts.maxResults]
-        time = trains?.aoRoute?[i]?.attributes?.sDepTime
+        time = connections?[i]?.aoTrains?[0]?.aoRoute?[0]?.attributes?.sDepTime
         times.push time if time
       return next 'Find error: no earliest time recognized' unless times.length
       debug "Result: #{times}"

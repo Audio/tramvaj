@@ -2,16 +2,16 @@
 require 'date-format-lite'
 memoize = require 'memoizee'
 
-exports.createFor = (apiClient) ->
+module.exports = (apiClient) ->
 
   renewOptions =
     async: yes
+    primitive: yes
     maxAge: 1000 * 60 * 60 * 12 # half day in ms
 
-  renewSession = memoize apiClient.login, renewOptions
-
-  renewSession: (req, res, next) ->
-    renewSession next
+  renewSession: memoize (req, res, next) ->
+    apiClient.login next
+  , renewOptions
 
   findEarliest: (req, res, next) ->
     now = new Date

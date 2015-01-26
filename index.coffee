@@ -10,8 +10,7 @@ api.createClient url, config.credentials, (e, apiClient) ->
     express = require 'express'
     app = express()
 
-    middlewares = require './lib/api.middleware.coffee'
-    middleware = middlewares.createFor apiClient
+    middleware = require('./lib/api.middleware.coffee') apiClient
     app.use middleware.renewSession
     app.use middleware.findEarliest
 
