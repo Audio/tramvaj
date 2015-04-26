@@ -22,7 +22,7 @@ module.exports = (apiClient) ->
       date: now.format 'DD.MM.YYYY'
       time: now.format 'hh:mm'
       isDepartureTime: yes
-      from: 'Vinohradska Vodarna'
+      from: 'Urxova'
       to: 'Kobylisy'
 
     apiClient.findEarliest opts, (e, time) ->
