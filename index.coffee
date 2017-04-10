@@ -1,7 +1,6 @@
 
 api = require './lib/api'
 config = require './config'
-debug = require('debug') 'tramvaj'
 
 api.createClient config.url, config.credentials, (e, apiClient) ->
     return console.log e if e
@@ -13,4 +12,4 @@ api.createClient config.url, config.credentials, (e, apiClient) ->
     app.use middleware.renewSession
     app.use middleware.findEarliest
 
-    app.listen config.port, -> debug "Listening on port #{config.port}"
+    app.listen config.port, -> console.log "Listening on port #{config.port}"
