@@ -10,3 +10,4 @@ module.exports =
     name: process.env.NAME
     pass: process.env.PASS
   port: process.env.PORT
+  url: 'http://ttws.timetable.cz/tt.asmx?WSDL'
