@@ -1,12 +1,8 @@
 const api = require('./lib/api')
 const config = require('./config')
 
-api.createClient(config.url, config.credentials, (e, apiClient) => {
-	if (e) {
-		console.log(e)
-		return
-	}
-
+api.createClient(config.url, config.credentials)
+.then(apiClient => {
 	const express = require('express')
 	const app = express()
 
@@ -18,3 +14,4 @@ api.createClient(config.url, config.credentials, (e, apiClient) => {
 		console.log(`Listening on port ${config.port}`)
 	})
 })
+.catch(console.error)
