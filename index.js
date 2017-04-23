@@ -6,7 +6,7 @@ idos.createClient(config.url, config.credentials)
 	const express = require('express')
 	const app = express()
 
-	const middleware = require('./lib/api.middleware')(idosClient)
+	const middleware = require('./lib/middleware')(idosClient)
 	app.use(middleware.renewSession)
 	app.use(middleware.findEarliest)
 
