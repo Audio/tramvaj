@@ -1,4 +1,4 @@
-require('dotenv').load()
+require('dotenv').config({path: `${__dirname}/.env`})
 
 for (let key of ['NAME', 'PASS', 'PORT']) {
 	if (key in process.env) continue
