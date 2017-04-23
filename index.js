@@ -8,8 +8,9 @@ idos.createClient(config.url, config.credentials)
 .then(idosClient => {
 	const middleware = require('./lib/middleware')(idosClient)
 	const endpoints = require('./lib/endpoints')(idosClient)
-	app.use(middleware.renewSession)
-	app.get('/', endpoints.findEarliest)
+	app.use('/api', middleware.renewSession)
+	app.get('/api/search', endpoints.getDepartures)
+	app.use(middleware.handleError)
 
 	app.listen(config.port, () => {
 		console.log(`Listening on port ${config.port}`)
