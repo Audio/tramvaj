@@ -1,14 +1,15 @@
+const express = require('express')
 const idos = require('./lib/idos')
 const config = require('./config')
 
+const app = express()
+
 idos.createClient(config.url, config.credentials)
 .then(idosClient => {
-	const express = require('express')
-	const app = express()
-
 	const middleware = require('./lib/middleware')(idosClient)
+	const endpoints = require('./lib/endpoints')(idosClient)
 	app.use(middleware.renewSession)
-	app.use(middleware.findEarliest)
+	app.get('/', endpoints.findEarliest)
 
 	app.listen(config.port, () => {
 		console.log(`Listening on port ${config.port}`)
