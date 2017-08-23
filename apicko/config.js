@@ -1,4 +1,5 @@
-require('dotenv').config({path: `${__dirname}/.env`})
+const configPath = require('path').resolve(__dirname, '../.env')
+require('dotenv').config({path: configPath})
 
 for (let key of ['NAME', 'PASS', 'PORT']) {
 	if (key in process.env) continue

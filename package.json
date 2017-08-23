@@ -2,10 +2,11 @@
   "name": "tramvaj",
   "version": "0.0.0",
   "description": "Finds earliest arrival time of my tram!",
-  "main": "index.coffee",
+  "main": "apicko/index.js",
   "scripts": {
+    "apicko": "node apicko/",
     "lint": "./node_modules/.bin/eslint .",
-    "test": "npm test"
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
