@@ -4,7 +4,7 @@ module.exports = (idosClient) => {
 	let renewOptions = {
 		async: true,
 		primitive: true,
-		maxAge: 1000 * 60 * 60 * 12, // half day in ms
+		maxAge: 1000 * 60 * 60 * 6, // 6 hours in millis
 	}
 
 	const renewSession = memoize(
