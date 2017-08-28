@@ -10,7 +10,7 @@ for (let key of ['HOSTNAME', 'FROM', 'TO']) {
 }
 
 module.exports = {
-	defaultTimeoutSeconds: 60,
+	defaultTimeoutSeconds: 90,
 	url: urlLib.format({
 		protocol: 'http',
 		hostname: process.env.HOSTNAME,
