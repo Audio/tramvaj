@@ -17,8 +17,10 @@ class Display {
 		this.lcd = new LCD(DEVICE_BUS, DEVICE_ADDRESS, DEVICE_COLUMNS, DEVICE_ROWS)
 	}
 
-	print (message, line = 1) {
-		this.lcd.println(message, line)
+	print (lines) {
+		this.lcd.clear()
+		if (lines[0]) this.lcd.println(lines[0], 1)
+		if (lines[1]) this.lcd.println(lines[1], 2)
 	}
 }
 
