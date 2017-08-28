@@ -1,9 +1,10 @@
 const Display = require('./display')
 const Timetable = require('./timetable')
+const utils = require('./utils')
 
 let display = new Display()
 const print = (results) => {
-	let lines = results.map(({line, time}) => `tram ${line} v ${time}`)
+	let lines = results.map(({line, time}) => `tram ${utils.padLineNumber(line)} v ${time}`)
 	display.print(lines)
 }
 
