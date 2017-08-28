@@ -16,6 +16,9 @@ class Timetable extends EventEmitter {
 			json: true,
 		})
 		.then(body => {
+			if (body.error) {
+				throw body.error
+			}
 			return body.result.map(result => ({
 				line: result.line,
 				time: result.from.time,
