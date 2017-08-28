@@ -11,7 +11,7 @@ class Display {
 	constructor () {
 		const DEVICE_BUS = 1
 		const DEVICE_ADDRESS = 0x3f
-		const DEVICE_COLUMNS = 20
+		const DEVICE_COLUMNS = 16
 		const DEVICE_ROWS = 2
 
 		this.lcd = new LCD(DEVICE_BUS, DEVICE_ADDRESS, DEVICE_COLUMNS, DEVICE_ROWS)
