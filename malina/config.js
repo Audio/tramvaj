@@ -18,7 +18,7 @@ module.exports = {
 		query: {
 			from: process.env.FROM,
 			to: process.env.TO,
-			maxResults: 2,
+			maxResults: 4,
 		},
 	}),
 }

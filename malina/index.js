@@ -4,8 +4,12 @@ const utils = require('./utils')
 
 let display = new Display()
 const print = (results) => {
-	let lines = results.map(({line, time}) => `tram ${utils.padLineNumber(line)} v ${time}`)
-	display.print(lines)
+	let output = []
+	for (let lineNum in results) {
+		let times = results[lineNum]
+		output.push(`${utils.padLineNumber(lineNum)}: ${times.join(', ')}`)
+	}
+	display.print(output)
 }
 
 let timetable = new Timetable()

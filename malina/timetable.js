@@ -19,10 +19,12 @@ class Timetable extends EventEmitter {
 			if (body.error) {
 				throw body.error
 			}
-			return body.result.map(result => ({
-				line: result.line,
-				time: result.from.time,
-			}))
+			return body.result.reduce((aggregatedResults, result) => {
+				let {line, from} = result
+				aggregatedResults[line] = aggregatedResults[line] || []
+				aggregatedResults[line].push(from.time)
+				return aggregatedResults
+			}, {})
 		})
 		.catch(err => {
 			this.emit('error', err)
@@ -44,13 +46,19 @@ class Timetable extends EventEmitter {
 	}
 
 	getSecondsToNextRefresh (results) {
-		if (!results.length) {
-			this.debug('no results, fallback timeout')
+		let times = []
+		for (let line in results) {
+			times = times.concat(results[line])
+		}
+		times.sort()
+
+		if (times.length < 2) {
+			this.debug('too few results, fallback timeout')
 			return config.defaultTimeoutSeconds
 		}
 
-		let nearestTime = results[0].time
-		let [hours, minutes] = nearestTime.split(':')
+		let secondNearestTime = times[1]
+		let [hours, minutes] = secondNearestTime.split(':')
 		let nearestDate = new Date()
 		nearestDate.setHours(hours)
 		nearestDate.setMinutes(minutes)
@@ -63,9 +71,6 @@ class Timetable extends EventEmitter {
 			this.debug('negative diff, fallback timeout')
 			return config.defaultTimeoutSeconds
 		}
-
-		// add 1 minute (wait for the tram to leave)
-		diffSec += 60
 
 		return diffSec
 	}
