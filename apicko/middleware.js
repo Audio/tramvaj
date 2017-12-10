@@ -1,20 +1,4 @@
-const memoize = require('memoizee')
-
-module.exports = (idosClient) => {
-	let renewOptions = {
-		async: true,
-		primitive: true,
-		maxAge: 1000 * 60 * 60 * 3, // 3 hours in millis
-	}
-
-	const renewSession = memoize(
-		(req, res, next) => {
-			idosClient.login()
-			.then(next)
-			.catch(next)
-		}
-		, renewOptions)
-
+module.exports = () => {
 	const handleError = (err, req, res, next) => {
 		console.error(new Date(), err.message)
 		if (err.stack) console.error(err.stack)
@@ -23,5 +7,5 @@ module.exports = (idosClient) => {
 		res.send({error: err.message})
 	}
 
-	return { handleError, renewSession }
+	return { handleError }
 }

@@ -20,9 +20,9 @@ class Timetable extends EventEmitter {
 				throw body.error
 			}
 			return body.result.reduce((aggregatedResults, result) => {
-				let {line, from} = result
+				let {line, time} = result
 				aggregatedResults[line] = aggregatedResults[line] || []
-				aggregatedResults[line].push(from.time)
+				aggregatedResults[line].push(time)
 				return aggregatedResults
 			}, {})
 		})

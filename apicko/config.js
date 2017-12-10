@@ -1,7 +1,7 @@
 const configPath = require('path').resolve(__dirname, '../.env')
 require('dotenv').config({path: configPath})
 
-for (let key of ['NAME', 'PASS', 'PORT']) {
+for (let key of ['PORT']) {
 	if (key in process.env) continue
 
 	console.log(`Environment variable '${key}' not set`)
@@ -9,10 +9,5 @@ for (let key of ['NAME', 'PASS', 'PORT']) {
 }
 
 module.exports = {
-	credentials: {
-		name: process.env.NAME,
-		pass: process.env.PASS,
-	},
 	port: process.env.PORT,
-	url: 'http://ttws.timetable.cz/tt.asmx?WSDL',
 }
