@@ -13,7 +13,7 @@ module.exports = (idosClient) => {
 			.then(next)
 			.catch(next)
 		}
-	, renewOptions)
+		, renewOptions)
 
 	const handleError = (err, req, res, next) => {
 		console.error(new Date(), err.message)

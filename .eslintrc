@@ -1,0 +1,20 @@
+{
+	"extends": "standard",
+	"plugins": [
+		"promise",
+		"standard",
+	],
+	"env": {
+		"node": true,
+	},
+	"rules": {
+		"comma-dangle": [2, "always-multiline"],
+		"consistent-return": 2,
+		"indent": [2, "tab", {"MemberExpression": "off"}],
+		"no-else-return": 2,
+		"no-tabs": 0,
+		"no-var": 2,
+		"radix": 2,
+		"semi": [2, "never"],
+	}
+}
