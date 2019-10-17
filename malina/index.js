@@ -2,9 +2,17 @@ const Display = require('./display')
 const Timetable = require('./timetable')
 const utils = require('./utils')
 
-const display = new Display()
+let display = null
+let output = []
+const initDisplay = () => {
+	display = new Display()
+	display.print(output)
+}
+initDisplay()
+setInterval(initDisplay, 60 * 60 * 1000)
+
 const print = (results) => {
-	const output = []
+	output = []
 	for (const lineNum in results) {
 		const times = results[lineNum]
 		output.push(`${utils.padLineNumber(lineNum)}: ${times.join(', ')}`)
