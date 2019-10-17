@@ -12,7 +12,7 @@ module.exports = (idosService) => {
 		return idosService.getDepartures(input)
 		.then(result => {
 			res.set('Content-Type', 'application/json')
-			res.send({input, result})
+			res.send({ input, result })
 		})
 		.catch(next)
 	}

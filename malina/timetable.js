@@ -6,7 +6,7 @@ const SEC_TO_MILLIS = 1000
 
 class Timetable extends EventEmitter {
 	debug (message) {
-		let now = new Date().toISOString()
+		const now = new Date().toISOString()
 		this.emit('debug', `${now}: ${message}`)
 	}
 
@@ -20,7 +20,7 @@ class Timetable extends EventEmitter {
 				throw body.error
 			}
 			return body.result.reduce((aggregatedResults, result) => {
-				let {line, time} = result
+				const { line, time } = result
 				aggregatedResults[line] = aggregatedResults[line] || []
 				aggregatedResults[line].push(time)
 				return aggregatedResults
@@ -40,14 +40,14 @@ class Timetable extends EventEmitter {
 	}
 
 	plan (results) {
-		let timeout = this.getSecondsToNextRefresh(results)
+		const timeout = this.getSecondsToNextRefresh(results)
 		this.debug(`next fetch in ${(timeout / 60).toFixed(2)} minutes`)
 		setTimeout(this.refresh.bind(this), timeout * SEC_TO_MILLIS)
 	}
 
 	getSecondsToNextRefresh (results) {
 		let times = []
-		for (let line in results) {
+		for (const line in results) {
 			times = times.concat(results[line])
 		}
 		times.sort()
@@ -57,16 +57,16 @@ class Timetable extends EventEmitter {
 			return config.defaultTimeoutSeconds
 		}
 
-		let secondNearestTime = times[1]
-		let [hours, minutes] = secondNearestTime.split(':')
-		let nearestDate = new Date()
+		const secondNearestTime = times[1]
+		const [hours, minutes] = secondNearestTime.split(':')
+		const nearestDate = new Date()
 		nearestDate.setHours(hours)
 		nearestDate.setMinutes(minutes)
 		nearestDate.setSeconds(0)
 		nearestDate.setMilliseconds(0)
 
-		let diffMillis = Number(nearestDate) - Date.now()
-		let diffSec = Math.floor(diffMillis / SEC_TO_MILLIS)
+		const diffMillis = Number(nearestDate) - Date.now()
+		const diffSec = Math.floor(diffMillis / SEC_TO_MILLIS)
 		if (diffSec < 1) {
 			this.debug('negative diff, fallback timeout')
 			return config.defaultTimeoutSeconds

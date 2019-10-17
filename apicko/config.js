@@ -1,7 +1,7 @@
 const configPath = require('path').resolve(__dirname, '../.env')
-require('dotenv').config({path: configPath})
+require('dotenv').config({ path: configPath })
 
-for (let key of ['PORT']) {
+for (const key of ['PORT']) {
 	if (key in process.env) continue
 
 	console.log(`Environment variable '${key}' not set`)

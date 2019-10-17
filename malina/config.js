@@ -1,8 +1,8 @@
 const configPath = require('path').resolve(__dirname, '../.env')
-require('dotenv').config({path: configPath})
+require('dotenv').config({ path: configPath })
 const urlLib = require('url')
 
-for (let key of ['HOSTNAME', 'FROM', 'TO']) {
+for (const key of ['HOSTNAME', 'FROM', 'TO']) {
 	if (key in process.env) continue
 
 	console.log(`Environment variable '${key}' not set`)

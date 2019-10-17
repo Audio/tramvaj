@@ -1,13 +1,13 @@
-const {JSDOM} = require('jsdom')
+const { JSDOM } = require('jsdom')
 const urlLib = require('url')
 
 const parseResults = (document) => {
-	let results = document.getElementsByClassName('conn')
+	const results = document.getElementsByClassName('conn')
 	return [].map.call(results, (result) => {
-		let lineTypeAndNumber = result.querySelector('.panel-body b').textContent.trim()
-		let line = lineTypeAndNumber.replace(/[^\d]/g, '')
-		let time = result.getElementsByClassName('timeinfo')[0].textContent
-		return {line, time}
+		const lineTypeAndNumber = result.querySelector('.panel-body b').textContent.trim()
+		const line = lineTypeAndNumber.replace(/[^\d]/g, '')
+		const time = result.getElementsByClassName('timeinfo')[0].textContent
+		return { line, time }
 	})
 }
 
@@ -19,13 +19,13 @@ const getResults = (url, maxResults) => {
 	return JSDOM.fromURL(url, options)
 	.then(dom => {
 		const document = dom.window.document
-		let results = parseResults(document)
+		const results = parseResults(document)
 		return results.slice(0, maxResults)
 	})
 }
 
 const getDepartures = (opts) => {
-	let url = urlLib.format({
+	const url = urlLib.format({
 		protocol: 'https',
 		hostname: 't.jizdnirady.idnes.cz',
 		query: {
